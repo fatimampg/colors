@@ -1,21 +1,17 @@
-
 import ColorName from './color-name';
 import HexToCMYK from './to-cmyk';
 import HexToHSL from './to-hsl';
 import HexToHSV from './to-hsv';
 import HexToRGB from './to-rgb';
-import { ColorsActions } from '../../color-reducer';
+import { ColorContext } from '../../context';
+import { useContext } from 'react';
 
-type AdjustColorsProps = {
-  hexColor: string;
-  dispatch: React.Dispatch<ColorsActions>
-};
-
-const AdjustColors = ({ hexColor, dispatch }: AdjustColorsProps) => {
+const AdjustColors = () => {
+  const { hexColor, dispatch } = useContext(ColorContext);
   return (
     <div className="flex flex-col w-full gap-4">
       <h3>Adjust Colors</h3>
-      <HexToRGB dispatch={dispatch}  hexColor={hexColor} />
+      <HexToRGB />
       <HexToHSL hexColor={hexColor} />
       <HexToHSV hexColor={hexColor} />
       <HexToCMYK hexColor={hexColor} />

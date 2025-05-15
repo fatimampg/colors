@@ -1,28 +1,20 @@
-import React from 'react';
+import { useContext } from 'react';
 import {
   getComplementColors,
   getTriadColors,
 } from '../../lib/get-related-colors';
 import RelatedColorPalette from './related-color-palette';
-import { ColorsActions } from '../../color-reducer';
+import { ColorContext } from '../../context';
 
-type RelatedColorsProps = {
-  hexColor: string;
-  dispatch: React.Dispatch<ColorsActions>;
-};
-
-const RelatedColors = ({ hexColor, dispatch }: RelatedColorsProps) => {
+const RelatedColors = () => {
+  const { hexColor } = useContext(ColorContext);
   const triadColors = getTriadColors(hexColor);
   const complementColors = getComplementColors(hexColor);
 
   return (
     <>
-      <RelatedColorPalette title="Triad Colors" hexColors={triadColors} dispatch={dispatch} />
-      <RelatedColorPalette
-        title="Complimentary Colors"
-        hexColors={complementColors}
-        dispatch={dispatch}
-      />
+      <RelatedColorPalette title="Triad Colors" hexColors={triadColors} />
+      <RelatedColorPalette title="Complimentary Colors" hexColors={complementColors} />
     </>
   );
 };
